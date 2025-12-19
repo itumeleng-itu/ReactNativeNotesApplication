@@ -1,5 +1,4 @@
 import { NoteCard } from '@/components/NoteCard';
-import { useAuth } from '@/context/AuthContext';
 import { useNotes } from '@/context/NotesContext';
 import { Note, SortOrder } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,30 +11,23 @@ import {
     Platform,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
 } from 'react-native';
 
-export default function HomeScreen() {
+export default function StudyScreen() {
   const router = useRouter();
-  const { user } = useAuth();
-  const { notes, isLoading, deleteNote, searchNotes, sortNotes } = useNotes();
-  const [searchQuery, setSearchQuery] = useState('');
+  const { notes, isLoading, deleteNote, getNotesByCategory } = useNotes();
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
-  const [showSortMenu, setShowSortMenu] = useState(false);
 
-  const displayedNotes = useMemo(() => {
-    let result: Note[];
-
-    if (searchQuery.trim()) {
-      result = searchNotes(searchQuery);
-    } else {
-      result = sortNotes(sortOrder);
-    }
-
-    return result;
-  }, [notes, searchQuery, sortOrder]);
+  const studyNotes = useMemo(() => {
+    const categoryNotes = getNotesByCategory('study');
+    return [...categoryNotes].sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+  }, [notes, sortOrder]);
 
   function handleNotePress(note: Note) {
     router.push({ pathname: '/note-detail', params: { id: note.id } });
@@ -67,72 +59,54 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <View>
-            <Text style={styles.greeting}>Hello, {user?.username}</Text>
+        <View style={styles.headerContent}>
+          <View style={styles.iconContainer}>
+            <Ionicons name="book" size={24} color="#FFFFFF" />
+          </View>
+          <View style={styles.headerText}>
+            <Text style={styles.title}>Study Notes</Text>
             <Text style={styles.subtitle}>
-              {notes.length} {notes.length === 1 ? 'note' : 'notes'} total
+              {studyNotes.length} {studyNotes.length === 1 ? 'note' : 'notes'}
             </Text>
           </View>
-          <TouchableOpacity
-            style={styles.profileButton}
-            onPress={() => router.push('/profile')}
-          >
-            <Text style={styles.profileButtonText}>
-              {user?.username?.charAt(0).toUpperCase() || 'U'}
-            </Text>
-          </TouchableOpacity>
         </View>
 
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color="#9CA3AF" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search notes..."
-            placeholderTextColor="#9CA3AF"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
+        <TouchableOpacity style={styles.sortButton} onPress={toggleSortOrder}>
+          <Ionicons
+            name={sortOrder === 'desc' ? 'arrow-down' : 'arrow-up'}
+            size={18}
+            color="#10B981"
           />
-          {searchQuery ? (
-            <TouchableOpacity onPress={() => setSearchQuery('')}>
-              <Ionicons name="close-circle" size={20} color="#9CA3AF" />
-            </TouchableOpacity>
-          ) : null}
-        </View>
-
-        <View style={styles.filterRow}>
-          <TouchableOpacity style={styles.sortButton} onPress={toggleSortOrder}>
-            <Ionicons
-              name={sortOrder === 'desc' ? 'arrow-down' : 'arrow-up'}
-              size={18}
-              color="#3B82F6"
-            />
-            <Text style={styles.sortButtonText}>
-              {sortOrder === 'desc' ? 'Newest First' : 'Oldest First'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+          <Text style={styles.sortButtonText}>
+            {sortOrder === 'desc' ? 'Newest' : 'Oldest'}
+          </Text>
+        </TouchableOpacity>
       </View>
 
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#3B82F6" />
+          <ActivityIndicator size="large" color="#10B981" />
         </View>
-      ) : displayedNotes.length === 0 ? (
+      ) : studyNotes.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="document-text-outline" size={80} color="#4B5563" />
-          <Text style={styles.emptyTitle}>
-            {searchQuery ? 'No notes found' : 'No notes yet'}
-          </Text>
+          <View style={styles.emptyIconContainer}>
+            <Ionicons name="book-outline" size={64} color="#10B981" />
+          </View>
+          <Text style={styles.emptyTitle}>No study notes yet</Text>
           <Text style={styles.emptySubtitle}>
-            {searchQuery
-              ? 'Try a different search term'
-              : 'Tap the + button to create your first note'}
+            Create a new note and select the Study category
           </Text>
+          <TouchableOpacity
+            style={styles.createButton}
+            onPress={() => router.push('/note-editor')}
+          >
+            <Ionicons name="add" size={20} color="#FFFFFF" />
+            <Text style={styles.createButtonText}>Create Note</Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <FlatList
-          data={displayedNotes}
+          data={studyNotes}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
@@ -163,6 +137,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#0F172A',
   },
   header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingBottom: 16,
@@ -170,67 +147,42 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },
-  headerTop: {
+  headerContent: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    gap: 12,
   },
-  greeting: {
-    fontSize: 24,
+  iconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 12,
+    backgroundColor: '#10B981',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    gap: 2,
+  },
+  title: {
+    fontSize: 22,
     fontWeight: '700',
     color: '#FFFFFF',
   },
   subtitle: {
     fontSize: 14,
     color: '#94A3B8',
-    marginTop: 4,
-  },
-  profileButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#3B82F6',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  profileButtonText: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#FFFFFF',
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#334155',
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    marginBottom: 12,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    height: 48,
-    color: '#FFFFFF',
-    fontSize: 16,
-  },
-  filterRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   sortButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    gap: 4,
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
   },
   sortButtonText: {
-    color: '#3B82F6',
+    color: '#10B981',
     fontSize: 13,
     fontWeight: '600',
   },
@@ -245,17 +197,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
   },
+  emptyIconContainer: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
   emptyTitle: {
     fontSize: 20,
     fontWeight: '600',
     color: '#FFFFFF',
-    marginTop: 16,
+    marginBottom: 8,
   },
   emptySubtitle: {
     fontSize: 14,
     color: '#94A3B8',
-    marginTop: 8,
     textAlign: 'center',
+    marginBottom: 24,
+  },
+  createButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: '#10B981',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+  },
+  createButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
   listContent: {
     padding: 16,
@@ -268,10 +243,10 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#10B981',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#3B82F6',
+    shadowColor: '#10B981',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 8,
