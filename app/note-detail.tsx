@@ -4,13 +4,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import {
-    Alert,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Alert,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default function NoteDetailScreen() {
@@ -31,7 +31,7 @@ export default function NoteDetailScreen() {
           <View style={styles.placeholder} />
         </View>
         <View style={styles.emptyContainer}>
-          <Ionicons name="document-text-outline" size={64} color="#4B5563" />
+          <Ionicons name="document-text-outline" size={64} color="#444444" />
           <Text style={styles.emptyText}>This note no longer exists</Text>
           <TouchableOpacity style={styles.goBackButton} onPress={() => router.back()}>
             <Text style={styles.goBackButtonText}>Go Back</Text>
@@ -78,10 +78,10 @@ export default function NoteDetailScreen() {
         <Text style={styles.headerTitle}>Note Details</Text>
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.actionButton} onPress={handleEdit}>
-            <Ionicons name="create-outline" size={22} color="#3B82F6" />
+            <Ionicons name="create-outline" size={22} color="#FFFFFF" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={handleDelete}>
-            <Ionicons name="trash-outline" size={22} color="#EF4444" />
+            <Ionicons name="trash-outline" size={22} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
       </View>
@@ -100,7 +100,7 @@ export default function NoteDetailScreen() {
                 : 'person'
             }
             size={14}
-            color="#FFFFFF"
+            color="#000000"
           />
           <Text style={styles.categoryText}>
             {note.category.charAt(0).toUpperCase() + note.category.slice(1)}
@@ -113,12 +113,12 @@ export default function NoteDetailScreen() {
 
         <View style={styles.metaContainer}>
           <View style={styles.metaItem}>
-            <Ionicons name="calendar-outline" size={16} color="#9CA3AF" />
+            <Ionicons name="calendar-outline" size={16} color="#999999" />
             <Text style={styles.metaText}>Created: {formatDate(note.createdAt)}</Text>
           </View>
           {note.updatedAt ? (
             <View style={styles.metaItem}>
-              <Ionicons name="time-outline" size={16} color="#9CA3AF" />
+              <Ionicons name="time-outline" size={16} color="#999999" />
               <Text style={styles.metaText}>Updated: {formatDate(note.updatedAt)}</Text>
             </View>
           ) : null}
@@ -135,7 +135,7 @@ export default function NoteDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -144,15 +144,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingBottom: 16,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderBottomWidth: 1,
-    borderBottomColor: '#334155',
+    borderBottomColor: '#333333',
   },
   backButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#334155',
+    backgroundColor: '#1A1A1A',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#334155',
+    backgroundColor: '#1A1A1A',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   categoryText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 12,
     fontWeight: '600',
   },
@@ -206,11 +206,13 @@ const styles = StyleSheet.create({
     lineHeight: 36,
   },
   metaContainer: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderRadius: 12,
     padding: 16,
     marginBottom: 24,
     gap: 8,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   metaItem: {
     flexDirection: 'row',
@@ -218,16 +220,18 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   metaText: {
-    color: '#9CA3AF',
+    color: '#999999',
     fontSize: 14,
   },
   contentContainer: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderRadius: 12,
     padding: 20,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   content: {
-    color: '#E5E7EB',
+    color: '#CCCCCC',
     fontSize: 16,
     lineHeight: 26,
   },
@@ -238,19 +242,19 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   emptyText: {
-    color: '#9CA3AF',
+    color: '#999999',
     fontSize: 16,
     marginTop: 16,
     marginBottom: 24,
   },
   goBackButton: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   goBackButtonText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 14,
     fontWeight: '600',
   },

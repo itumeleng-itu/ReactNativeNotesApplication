@@ -24,11 +24,11 @@ export function validatePassword(password: string): boolean {
 
 export function getCategoryColor(category: string): string {
     const colors: Record<string, string> = {
-        work: '#3B82F6',
-        study: '#10B981',
-        personal: '#F59E0B',
+        work: '#FFFFFF',
+        study: '#CCCCCC',
+        personal: '#999999',
     };
-    return colors[category] || '#6B7280';
+    return colors[category] || '#666666';
 }
 
 export function getCategoryIcon(category: string): string {

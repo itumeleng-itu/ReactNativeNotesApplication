@@ -9,6 +9,18 @@ import "../global.css";
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { NotesProvider } from '@/context/NotesContext';
 
+const BlackTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    background: '#000000',
+    card: '#000000',
+    text: '#FFFFFF',
+    border: '#333333',
+    primary: '#FFFFFF',
+  },
+};
+
 function RootLayoutNav() {
   const { user, isLoading } = useAuth();
   const segments = useSegments();
@@ -29,14 +41,14 @@ function RootLayoutNav() {
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#3B82F6" />
+        <ActivityIndicator size="large" color="#FFFFFF" />
       </View>
     );
   }
 
   return (
     <NotesProvider>
-      <ThemeProvider value={DarkTheme}>
+      <ThemeProvider value={BlackTheme}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="login" />
           <Stack.Screen name="register" />
@@ -64,6 +76,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0F172A',
+    backgroundColor: '#000000',
   },
 });

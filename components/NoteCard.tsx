@@ -24,17 +24,17 @@ export function NoteCard({ note, onPress, onEdit, onDelete }: NoteCardProps) {
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.header}>
         <View style={[styles.categoryBadge, { backgroundColor: categoryColor }]}>
-          <Ionicons name={categoryIcon as any} size={12} color="#FFFFFF" />
+          <Ionicons name={categoryIcon as any} size={12} color="#000000" />
           <Text style={styles.categoryText}>
             {note.category.charAt(0).toUpperCase() + note.category.slice(1)}
           </Text>
         </View>
         <View style={styles.actions}>
           <TouchableOpacity style={styles.actionButton} onPress={onEdit}>
-            <Ionicons name="create-outline" size={18} color="#3B82F6" />
+            <Ionicons name="create-outline" size={18} color="#FFFFFF" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={onDelete}>
-            <Ionicons name="trash-outline" size={18} color="#EF4444" />
+            <Ionicons name="trash-outline" size={18} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
       </View>
@@ -47,12 +47,12 @@ export function NoteCard({ note, onPress, onEdit, onDelete }: NoteCardProps) {
 
       <View style={styles.footer}>
         <View style={styles.dateContainer}>
-          <Ionicons name="calendar-outline" size={14} color="#6B7280" />
+          <Ionicons name="calendar-outline" size={14} color="#666666" />
           <Text style={styles.dateText}>{formatDate(note.createdAt)}</Text>
         </View>
         {note.updatedAt ? (
           <View style={styles.updatedContainer}>
-            <Ionicons name="time-outline" size={14} color="#F59E0B" />
+            <Ionicons name="time-outline" size={14} color="#999999" />
             <Text style={styles.updatedText}>Edited</Text>
           </View>
         ) : null}
@@ -63,12 +63,12 @@ export function NoteCard({ note, onPress, onEdit, onDelete }: NoteCardProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#333333',
   },
   header: {
     flexDirection: 'row',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   categoryText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 11,
     fontWeight: '600',
   },
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 8,
-    backgroundColor: '#334155',
+    backgroundColor: '#1A1A1A',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 14,
-    color: '#9CA3AF',
+    color: '#999999',
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: '#334155',
+    borderTopColor: '#333333',
   },
   dateContainer: {
     flexDirection: 'row',
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   dateText: {
-    color: '#6B7280',
+    color: '#666666',
     fontSize: 12,
   },
   updatedContainer: {
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   updatedText: {
-    color: '#F59E0B',
+    color: '#999999',
     fontSize: 12,
     fontWeight: '500',
   },

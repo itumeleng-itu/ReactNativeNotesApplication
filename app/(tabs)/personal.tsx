@@ -61,7 +61,7 @@ export default function PersonalScreen() {
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <View style={styles.iconContainer}>
-            <Ionicons name="person" size={24} color="#FFFFFF" />
+            <Ionicons name="person" size={24} color="#000000" />
           </View>
           <View style={styles.headerText}>
             <Text style={styles.title}>Personal Notes</Text>
@@ -75,7 +75,7 @@ export default function PersonalScreen() {
           <Ionicons
             name={sortOrder === 'desc' ? 'arrow-down' : 'arrow-up'}
             size={18}
-            color="#F59E0B"
+            color="#FFFFFF"
           />
           <Text style={styles.sortButtonText}>
             {sortOrder === 'desc' ? 'Newest' : 'Oldest'}
@@ -85,12 +85,12 @@ export default function PersonalScreen() {
 
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#F59E0B" />
+          <ActivityIndicator size="large" color="#FFFFFF" />
         </View>
       ) : personalNotes.length === 0 ? (
         <View style={styles.emptyContainer}>
           <View style={styles.emptyIconContainer}>
-            <Ionicons name="person-outline" size={64} color="#F59E0B" />
+            <Ionicons name="person-outline" size={64} color="#FFFFFF" />
           </View>
           <Text style={styles.emptyTitle}>No personal notes yet</Text>
           <Text style={styles.emptySubtitle}>
@@ -100,7 +100,7 @@ export default function PersonalScreen() {
             style={styles.createButton}
             onPress={() => router.push('/note-editor')}
           >
-            <Ionicons name="add" size={20} color="#FFFFFF" />
+            <Ionicons name="add" size={20} color="#000000" />
             <Text style={styles.createButtonText}>Create Note</Text>
           </TouchableOpacity>
         </View>
@@ -125,7 +125,7 @@ export default function PersonalScreen() {
         style={styles.fab}
         onPress={() => router.push('/note-editor')}
       >
-        <Ionicons name="add" size={28} color="#FFFFFF" />
+        <Ionicons name="add" size={28} color="#000000" />
       </TouchableOpacity>
     </View>
   );
@@ -134,7 +134,7 @@ export default function PersonalScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingBottom: 16,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 12,
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -170,19 +170,21 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#999999',
   },
   sortButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+    backgroundColor: '#1A1A1A',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   sortButtonText: {
-    color: '#F59E0B',
+    color: '#FFFFFF',
     fontSize: 13,
     fontWeight: '600',
   },
@@ -201,10 +203,12 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+    backgroundColor: '#111111',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   emptyTitle: {
     fontSize: 20,
@@ -214,7 +218,7 @@ const styles = StyleSheet.create({
   },
   emptySubtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#999999',
     textAlign: 'center',
     marginBottom: 24,
   },
@@ -222,13 +226,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#FFFFFF',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 12,
   },
   createButtonText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -243,13 +247,9 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#F59E0B',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 8,
+    elevation: 4,
   },
 });

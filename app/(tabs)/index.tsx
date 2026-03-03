@@ -85,17 +85,17 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color="#9CA3AF" style={styles.searchIcon} />
+          <Ionicons name="search" size={20} color="#666666" style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search notes..."
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor="#666666"
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
           {searchQuery ? (
             <TouchableOpacity onPress={() => setSearchQuery('')}>
-              <Ionicons name="close-circle" size={20} color="#9CA3AF" />
+              <Ionicons name="close-circle" size={20} color="#666666" />
             </TouchableOpacity>
           ) : null}
         </View>
@@ -105,7 +105,7 @@ export default function HomeScreen() {
             <Ionicons
               name={sortOrder === 'desc' ? 'arrow-down' : 'arrow-up'}
               size={18}
-              color="#3B82F6"
+              color="#FFFFFF"
             />
             <Text style={styles.sortButtonText}>
               {sortOrder === 'desc' ? 'Newest First' : 'Oldest First'}
@@ -116,11 +116,11 @@ export default function HomeScreen() {
 
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#3B82F6" />
+          <ActivityIndicator size="large" color="#FFFFFF" />
         </View>
       ) : displayedNotes.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="document-text-outline" size={80} color="#4B5563" />
+          <Ionicons name="document-text-outline" size={80} color="#444444" />
           <Text style={styles.emptyTitle}>
             {searchQuery ? 'No notes found' : 'No notes yet'}
           </Text>
@@ -151,7 +151,7 @@ export default function HomeScreen() {
         style={styles.fab}
         onPress={() => router.push('/note-editor')}
       >
-        <Ionicons name="add" size={28} color="#FFFFFF" />
+        <Ionicons name="add" size={28} color="#000000" />
       </TouchableOpacity>
     </View>
   );
@@ -160,13 +160,13 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#000000',
   },
   header: {
     paddingHorizontal: 16,
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingBottom: 16,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },
@@ -183,29 +183,31 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#999999',
     marginTop: 4,
   },
   profileButton: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
   },
   profileButtonText: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: '#000000',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#334155',
+    backgroundColor: '#1A1A1A',
     borderRadius: 12,
     paddingHorizontal: 12,
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   searchIcon: {
     marginRight: 8,
@@ -224,13 +226,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: '#1A1A1A',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   sortButtonText: {
-    color: '#3B82F6',
+    color: '#FFFFFF',
     fontSize: 13,
     fontWeight: '600',
   },
@@ -253,7 +257,7 @@ const styles = StyleSheet.create({
   },
   emptySubtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#999999',
     marginTop: 8,
     textAlign: 'center',
   },
@@ -268,13 +272,9 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#3B82F6',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 8,
+    elevation: 4,
   },
 });

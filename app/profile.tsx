@@ -4,16 +4,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    ActivityIndicator,
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default function ProfileScreen() {
@@ -143,14 +143,14 @@ export default function ProfileScreen() {
         <View style={styles.form}>
           {error ? (
             <View style={styles.errorContainer}>
-              <Ionicons name="alert-circle" size={20} color="#EF4444" />
+              <Ionicons name="alert-circle" size={20} color="#FFFFFF" />
               <Text style={styles.errorText}>{error}</Text>
             </View>
           ) : null}
 
           {success ? (
             <View style={styles.successContainer}>
-              <Ionicons name="checkmark-circle" size={20} color="#10B981" />
+              <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
               <Text style={styles.successText}>{success}</Text>
             </View>
           ) : null}
@@ -158,11 +158,11 @@ export default function ProfileScreen() {
           <Text style={styles.sectionTitle}>Account Information</Text>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="person-outline" size={20} color="#9CA3AF" style={styles.inputIcon} />
+            <Ionicons name="person-outline" size={20} color="#666666" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="Username"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor="#666666"
               value={username}
               onChangeText={setUsername}
               autoCapitalize="none"
@@ -171,11 +171,11 @@ export default function ProfileScreen() {
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="mail-outline" size={20} color="#9CA3AF" style={styles.inputIcon} />
+            <Ionicons name="mail-outline" size={20} color="#666666" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="Email address"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor="#666666"
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
@@ -188,11 +188,11 @@ export default function ProfileScreen() {
           <Text style={styles.sectionSubtitle}>Leave empty to keep current password</Text>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={20} color="#9CA3AF" style={styles.inputIcon} />
+            <Ionicons name="lock-closed-outline" size={20} color="#666666" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="Current password"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor="#666666"
               value={currentPassword}
               onChangeText={setCurrentPassword}
               secureTextEntry={!showCurrentPassword}
@@ -204,17 +204,17 @@ export default function ProfileScreen() {
               <Ionicons
                 name={showCurrentPassword ? 'eye-off-outline' : 'eye-outline'}
                 size={20}
-                color="#9CA3AF"
+                color="#666666"
               />
             </TouchableOpacity>
           </View>
 
           <View style={styles.inputContainer}>
-            <Ionicons name="lock-open-outline" size={20} color="#9CA3AF" style={styles.inputIcon} />
+            <Ionicons name="lock-open-outline" size={20} color="#666666" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
               placeholder="New password"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor="#666666"
               value={newPassword}
               onChangeText={setNewPassword}
               secureTextEntry={!showNewPassword}
@@ -226,7 +226,7 @@ export default function ProfileScreen() {
               <Ionicons
                 name={showNewPassword ? 'eye-off-outline' : 'eye-outline'}
                 size={20}
-                color="#9CA3AF"
+                color="#666666"
               />
             </TouchableOpacity>
           </View>
@@ -237,14 +237,14 @@ export default function ProfileScreen() {
             disabled={isLoading}
           >
             {isLoading ? (
-              <ActivityIndicator color="#FFFFFF" />
+              <ActivityIndicator color="#000000" />
             ) : (
               <Text style={styles.buttonText}>Save Changes</Text>
             )}
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Ionicons name="log-out-outline" size={20} color="#EF4444" />
+            <Ionicons name="log-out-outline" size={20} color="#FFFFFF" />
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -256,7 +256,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#000000',
   },
   scrollContent: {
     flexGrow: 1,
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -293,20 +293,15 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 48,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
-    shadowColor: '#3B82F6',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
   },
   avatarText: {
     fontSize: 40,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: '#000000',
   },
   usernameDisplay: {
     fontSize: 20,
@@ -316,7 +311,7 @@ const styles = StyleSheet.create({
   },
   emailDisplay: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#999999',
   },
   form: {
     width: '100%',
@@ -330,43 +325,45 @@ const styles = StyleSheet.create({
   },
   sectionSubtitle: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#999999',
     marginBottom: 16,
   },
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: '#333333',
     borderRadius: 12,
     padding: 12,
     marginBottom: 16,
   },
   errorText: {
-    color: '#EF4444',
+    color: '#FFFFFF',
     marginLeft: 8,
     flex: 1,
   },
   successContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    backgroundColor: '#1A1A1A',
     borderRadius: 12,
     padding: 12,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   successText: {
-    color: '#10B981',
+    color: '#FFFFFF',
     marginLeft: 8,
     flex: 1,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderRadius: 12,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#333333',
   },
   inputIcon: {
     paddingLeft: 16,
@@ -382,23 +379,18 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   button: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#FFFFFF',
     height: 56,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 8,
-    shadowColor: '#3B82F6',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
   },
   buttonDisabled: {
     opacity: 0.7,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 18,
     fontWeight: '600',
   },
@@ -409,10 +401,12 @@ const styles = StyleSheet.create({
     marginTop: 24,
     padding: 16,
     borderRadius: 12,
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: '#1A1A1A',
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   logoutText: {
-    color: '#EF4444',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 8,

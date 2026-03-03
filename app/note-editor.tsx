@@ -1,19 +1,18 @@
 import { useNotes } from '@/context/NotesContext';
 import { NoteCategory } from '@/types';
-import { getCategoryColor } from '@/utils/helpers';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 const CATEGORIES: { value: NoteCategory; label: string; icon: string }[] = [
@@ -94,7 +93,7 @@ export default function NoteEditorScreen() {
           disabled={isLoading}
         >
           {isLoading ? (
-            <ActivityIndicator color="#FFFFFF" size="small" />
+            <ActivityIndicator color="#000000" size="small" />
           ) : (
             <Text style={styles.saveButtonText}>Save</Text>
           )}
@@ -108,7 +107,7 @@ export default function NoteEditorScreen() {
       >
         {error ? (
           <View style={styles.errorContainer}>
-            <Ionicons name="alert-circle" size={20} color="#EF4444" />
+            <Ionicons name="alert-circle" size={20} color="#FFFFFF" />
             <Text style={styles.errorText}>{error}</Text>
           </View>
         ) : null}
@@ -121,8 +120,8 @@ export default function NoteEditorScreen() {
               style={[
                 styles.categoryButton,
                 category === cat.value && {
-                  backgroundColor: getCategoryColor(cat.value),
-                  borderColor: getCategoryColor(cat.value),
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#FFFFFF',
                 },
               ]}
               onPress={() => setCategory(cat.value)}
@@ -130,7 +129,7 @@ export default function NoteEditorScreen() {
               <Ionicons
                 name={cat.icon as any}
                 size={18}
-                color={category === cat.value ? '#FFFFFF' : '#9CA3AF'}
+                color={category === cat.value ? '#000000' : '#666666'}
               />
               <Text
                 style={[
@@ -148,7 +147,7 @@ export default function NoteEditorScreen() {
         <TextInput
           style={styles.titleInput}
           placeholder="Enter note title..."
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor="#666666"
           value={title}
           onChangeText={setTitle}
           maxLength={100}
@@ -158,7 +157,7 @@ export default function NoteEditorScreen() {
         <TextInput
           style={styles.contentInput}
           placeholder="Write your note here..."
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor="#666666"
           value={content}
           onChangeText={setContent}
           multiline
@@ -172,7 +171,7 @@ export default function NoteEditorScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -181,15 +180,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     paddingBottom: 16,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderBottomWidth: 1,
-    borderBottomColor: '#334155',
+    borderBottomColor: '#333333',
   },
   backButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#334155',
+    backgroundColor: '#1A1A1A',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -201,14 +200,14 @@ const styles = StyleSheet.create({
   saveButton: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#FFFFFF',
     borderRadius: 8,
   },
   saveButtonDisabled: {
     opacity: 0.7,
   },
   saveButtonText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 14,
     fontWeight: '600',
   },
@@ -222,20 +221,20 @@ const styles = StyleSheet.create({
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: '#333333',
     borderRadius: 12,
     padding: 12,
     marginBottom: 16,
   },
   errorText: {
-    color: '#EF4444',
+    color: '#FFFFFF',
     marginLeft: 8,
     flex: 1,
   },
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#94A3B8',
+    color: '#999999',
     marginBottom: 8,
     marginTop: 16,
   },
@@ -252,36 +251,36 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 12,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#333333',
   },
   categoryButtonText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#9CA3AF',
+    color: '#666666',
   },
   categoryButtonTextActive: {
-    color: '#FFFFFF',
+    color: '#000000',
   },
   titleInput: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderRadius: 12,
     padding: 16,
     color: '#FFFFFF',
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#333333',
   },
   contentInput: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#111111',
     borderRadius: 12,
     padding: 16,
     color: '#FFFFFF',
     fontSize: 16,
     minHeight: 200,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#333333',
     flex: 1,
   },
 });
