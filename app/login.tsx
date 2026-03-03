@@ -1,17 +1,18 @@
 import { useAuth } from '@/context/AuthContext';
+import { storage, StorageKeys } from '@/utils/storage';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default function LoginScreen() {
@@ -22,6 +23,17 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    loadSavedEmail();
+  }, []);
+
+  async function loadSavedEmail() {
+    const savedEmail = await storage.get<string>(StorageKeys.LAST_EMAIL);
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }
 
   async function handleLogin() {
     setError('');
@@ -36,6 +48,7 @@ export default function LoginScreen() {
     setIsLoading(false);
 
     if (success) {
+      await storage.set(StorageKeys.LAST_EMAIL, email.trim());
       router.replace('/(tabs)');
     } else {
       setError('Invalid email or password');

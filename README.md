@@ -1,4 +1,4 @@
-# React Native Notes Application 📝
+# React Native Notes Application
 
 A mobile notes application built with React Native and Expo. Users can register, log in, and manage personal notes organised by categories (**Work**, **Study**, **Personal**). Data is persisted locally using AsyncStorage.
 
